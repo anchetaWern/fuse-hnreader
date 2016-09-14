@@ -1,0 +1,60 @@
+<App>
+	<JavaScript File="js/App.js" />
+
+	<PageControl Active="{current_page}">
+		<Page Name="news_items">
+		    <DockPanel>
+		        <JavaScript File="js/NewsItems.js" />            
+		           
+		        <StatusBarBackground Dock="Top" />
+		      
+		        <StackPanel Dock="Top" Color="#FF6600">
+		            <Text FontSize="18" Margin="0,10,0,10" Alignment="VerticalCenter" TextAlignment="Center" TextColor="#FFF" Value="{title}" />
+		        </StackPanel>
+
+				<Rectangle Width="50" Height="50" Fill="#FA983C" Opacity="{loader_opacity}">
+					<Scaling ux:Name="loaderScale" Factor="1" />
+					<Rotation ux:Name="loaderRotate" Degrees="0" />
+				</Rectangle>
+				<Timeline PlayMode="Wrap">
+					<Change loaderScale.Factor="1.5" Duration="1" Easing="QuadraticInOut" />
+					<Change loaderRotate.Degrees="360" Duration="1" Easing="QuadraticInOut" />
+				</Timeline>
+				
+		        <ScrollView>
+		            <StackPanel Alignment="Top">
+		                <Each Items="{news_items}">
+		                    <Panel Clicked="{navigatePage}" Alignment="VerticalCenter">
+								<Text Margin="10,20,10,20" TextWrapping="Wrap" FontSize="20" Value="{title}" />
+		                    </Panel>
+		                    <Rectangle Height="1" Fill="#dcdee3" />
+		                </Each>
+		            </StackPanel>
+		        </ScrollView>
+		    </DockPanel>
+		</Page>
+
+		<Page Name="web_page">
+		    <DockPanel>
+		        <StatusBarBackground Dock="Top" />
+		        <WrapPanel Dock="Top" Color="#FF6600">
+					<Text FontSize="18" Margin="10,10,0,10" Alignment="Left" TextAlignment="Left" TextColor="#FFF" Value="Back" Width="100" Clicked="{navigatePage}" />
+
+		            <Text FontSize="18" Alignment="VerticalCenter" TextAlignment="Center" TextColor="#FFF" Value="{title}" />
+		        </WrapPanel>
+		        
+				<Panel ux:Class="LoadingBar" Width="5%" Height="10" Color="#fc0" Alignment="Left" />
+				<LoadingBar Dock="Top" ux:Name="_loadingBar" />
+				<Panel>				
+					<NativeViewHost>
+					    <WebView Dock="Fill" Url="{current_url}" ux:Name="webpage">
+							<ProgressAnimation>
+							    <Change _loadingBar.Width="100%" />
+							</ProgressAnimation>
+					    </WebView>
+					</NativeViewHost>
+				</Panel>
+		    </DockPanel>
+		</Page>
+	</PageControl>
+</App>
