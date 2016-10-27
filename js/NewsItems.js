@@ -1,9 +1,9 @@
-var Observable = require("FuseJS/Observable");
+const Observable = require("FuseJS/Observable");
 var loader_opacity = Observable('1');
 
 var news_items = Observable();  
 
-var TOP_STORIES_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';          
+const TOP_STORIES_URL = 'https://hacker-news.firebaseio.com/v0/topstories.json';          
 
 var story_promises = [];
 
