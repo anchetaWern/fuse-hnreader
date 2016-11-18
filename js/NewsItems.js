@@ -12,9 +12,9 @@ fetch(TOP_STORIES_URL)
 .then(function(top_stories) {
 
     for(var x = 0; x <= 10; x++){
-        const story_url = "https://hacker-news.firebaseio.com/v0/item/" + top_stories[x] + ".json";
+        var story_url = "https://hacker-news.firebaseio.com/v0/item/" + top_stories[x] + ".json";
          
-       	const p = fetch(story_url)
+       	var p = fetch(story_url)
         .then(function(response) { return response.json(); })
         .then(function(news) { 
         	news_items.add({
